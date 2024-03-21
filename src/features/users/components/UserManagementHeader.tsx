@@ -8,7 +8,7 @@ const UserManagementHeader = () => {
     };
 
     return (
-        <div className='my-3 flex flex-col sm:flex-row justify-between items-center'>
+        <div className='flex flex-col sm:flex-row justify-between items-center'>
             <div className="font-bold my-2 text-xl">User Management</div>
             <button 
                 className='px-4 py-1 bg-blue-500 text-white font-bold rounded my-2'

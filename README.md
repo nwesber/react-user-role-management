@@ -1,30 +1,95 @@
-# React + TypeScript + Vite
+# React User Role Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains a modern web application built with Vite, React, and TypeScript.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. [Getting Started](#getting-started)
+2. [Local Development Setup](#local-development-setup)
+3. [Testing](#testing)
+4. [Production Deployment](#production-deployment)
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js and npm installed on your machine.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+To get started with this project, make sure you have [Node.js](https://nodejs.org) and [npm](https://www.npmjs.com/get-npm) installed on your machine.
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a .env.local file in the root directory of your project and add the following line:
+
+```bash
+API_URL=http://localhost:3000
+```
+
+## Local Development Setup
+
+To start the development server locally, run:
+
+```bash
+npm run dev
+```
+
+This command will spin up a development server using Vite and hot module replacement, allowing you to see your changes in real-time as you develop.
+
+Open your browser and navigate to http://localhost:5173 to view the application.
+
+## Testing
+
+### Unit Tests
+
+This project uses Jest as the testing framework for unit tests.
+
+To run unit tests, use the following command:
+
+```bash
+npm run test
+```
+
+### End-to-End Tests
+
+For end-to-end testing, this project uses Cypress.
+
+To run end-to-end tests, use the following command:
+
+```bash
+npm run test:e2e
+```
+
+## Production Deployment
+
+To build the application for production, use the following command:
+
+```bash
+npm run build
+```
+
+This command will generate an optimized build of your application in the dist directory.
+
+You can then deploy this build to your hosting provider of choice.
+
+## Serving the Production Build Locally
+
+```bash
+npm run serve
+```
+
+This will serve the production build of your application on http://localhost:5000.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

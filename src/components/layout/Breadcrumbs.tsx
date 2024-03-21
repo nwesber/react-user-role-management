@@ -1,15 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Represents a single breadcrumb item.
+ */
 interface BreadcrumbItem {
-  path: string;
-  label: string;
+    path: string;
+    label: string;
 }
 
+/**
+ * Props for the Breadcrumbs component.
+ */
 interface BreadcrumbsProps {
-  items: BreadcrumbItem[];
+    items: BreadcrumbItem[];
 }
 
+/**
+ * Breadcrumbs Component
+ * 
+ * Renders a breadcrumb navigation list based on the provided items.
+ * This component is used to enhance user navigation experience by providing a path back to the home page
+ * or to any parent page.
+ *
+ * Props:
+ * - items: An array of objects representing each breadcrumb. Each item contains a 'path' for the link
+ *          and a 'label' for the breadcrumb's display text.
+ */
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
     return (
         <nav className="text-gray-500 text-sm" aria-label="Breadcrumb">

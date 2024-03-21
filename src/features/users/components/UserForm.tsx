@@ -4,6 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import { UserFormProps, RoleOption, roleOptions } from '../types';
 
+/**
+ * A form component for creating or editing a user.
+ * 
+ * This form includes fields for the user's full name, email address, and roles.
+ * It supports both creation and update operations based on the initial props provided.
+ *
+ * @param {UserFormProps} props - The props containing initial form values, submission handler, and errors.
+ */
 const UserForm: React.FC<UserFormProps> = ({
     initialEmail = '',
     initialFullName = '',
@@ -11,17 +19,26 @@ const UserForm: React.FC<UserFormProps> = ({
     onSubmit,
     errors
 }) => {
+
+    // State hooks for form fields
     const [email, setEmail] = useState<string>(initialEmail);
     const [fullName, setFullName] = useState<string>(initialFullName);
     const [selectedRoles, setSelectedRoles] = useState<RoleOption[]>(initialRoles);
 
     const navigate = useNavigate();
 
+    /**
+     * Handles the submission of the form, preventing the default form submit action,
+     * and invokes the provided onSubmit callback with the current form values.
+     */
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         onSubmit(email, fullName, selectedRoles);
     };
 
+    /**
+     * Navigates the user back to the home page.
+     */
     const handleGoBack = () => {
         navigate('/');
     };
@@ -29,6 +46,7 @@ const UserForm: React.FC<UserFormProps> = ({
     return (
         <form onSubmit={handleSubmit}>
 
+            {/* Errors Section */}
             {errors && (errors.email && errors.email.length > 0) && (
                 <div className='mb-4 bg-red-700 text-white rounded-md p-4'>
                     {errors.email && (
@@ -39,7 +57,6 @@ const UserForm: React.FC<UserFormProps> = ({
                 </div>
             )}
 
-            
             {/* Full Name Input */}
             <div className='mb-4'>
                 <label htmlFor='fullName' className='block mb-2 text-sm font-medium text-gray-700'>Full Name<span className='text-red-500 mx-2'>*</span></label>
@@ -53,6 +70,7 @@ const UserForm: React.FC<UserFormProps> = ({
                     required
                 />
             </div>
+
             {/* Email Input */}
             <div className='mb-4'>
                 <label htmlFor='email' className='block mb-2 text-sm font-medium text-gray-700'>Email Address<span className='text-red-500 mx-2'>*</span></label>
@@ -66,6 +84,7 @@ const UserForm: React.FC<UserFormProps> = ({
                     required
                 />
             </div>
+
             {/* Roles Select */}
             <div className='mb-4'>
                 <label htmlFor='roles' className='block mb-2 text-sm font-medium text-gray-700'>Roles<span className='text-red-500 mx-2'>*</span></label>
@@ -80,6 +99,8 @@ const UserForm: React.FC<UserFormProps> = ({
                     className='text-base border border-gray-300 rounded-lg'
                 />
             </div>
+
+            {/* Actions Section */}
             <div className='flex justify-between space-x-4'>
                 <button
                     type='button' 

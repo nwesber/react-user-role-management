@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { UserTable, UserService } from '../../features/users';
 import { User } from '../../features/users/types';
 import Breadcrumbs from '../../components/layout/Breadcrumbs';
+import Pagination from '../../components/layout/Pagination';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -19,6 +20,10 @@ const UserLists: React.FC = () => {
 
     // State to hold the list of users
     const [users, setUsers] = useState<User[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+
+
 
     // Breadcrumb navigation items
     const breadcrumbItems = [
@@ -39,17 +44,23 @@ const UserLists: React.FC = () => {
      * Fetches users from the server on component mount and updates the state.
      */
     useEffect(() => {
-        const fetchUsers = async () => {
+        const fetchUsers = async (page: number = 1) => {
             try {
-                const response = await userService.getUsers();
-                setUsers(response);
+                const response = await userService.getUsers(page);
+                setUsers(response.data);
+                setTotalPages(response.meta.last_page);
+                setCurrentPage(response.meta.current_page);
             } catch (error) {
                 console.error('Failed to fetch users:', error);
             }
         };
 
-        fetchUsers();
-    }, []);
+        fetchUsers(currentPage);
+    }, [currentPage]);
+
+    const navigateToPage = (page: number) => {
+        setCurrentPage(page);
+    };
 
     /**
      * Deletes a user after confirmation.
@@ -83,6 +94,7 @@ const UserLists: React.FC = () => {
                 </button>
             </div>
             <UserTable users={users} onDeleteUser={deleteUser} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
         </div>
     );
 };

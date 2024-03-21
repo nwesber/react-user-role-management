@@ -1,7 +1,7 @@
 // src/services/UserService.ts
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-import { User, UserCreation } from '../types';
+import { User, UserCreation, UsersApiResponse } from '../types';
 
 /**
  * Service class responsible for making API calls related to user operations.
@@ -29,9 +29,9 @@ class UserService {
      * 
      * @returns {Promise<User[]>} A promise that resolves to an array of User objects.
      */
-    public async getUsers(): Promise<User[]> {
-        const response = await this.axiosInstance.get('/api/users');
-        return response.data.data;
+    public async getUsers(page: number): Promise<UsersApiResponse> {
+        const response = await this.axiosInstance.get(`/api/users?page=${page}`);
+        return response.data;
     }
 
     /**

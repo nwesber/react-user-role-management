@@ -72,7 +72,14 @@ npm run test:e2e
 
 ## Production Deployment
 
-To build the application for production, use the following command:
+1. Create a .env.production file in the root directory of your project and add the following line:
+
+```
+API_URL=https://api.example.com
+
+```
+
+2. To build the application for production, use the following command:
 
 ```bash
 npm run build

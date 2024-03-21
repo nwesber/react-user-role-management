@@ -1,10 +1,10 @@
 // src/services/UserService.ts
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-import { User } from '../types';
+import { User, UserCreation } from '../types';
 
 class UserService {
-  private axiosInstance: AxiosInstance;
+    private axiosInstance: AxiosInstance;
 
     constructor(baseURL: string) {
         this.axiosInstance = axios.create({
@@ -24,7 +24,7 @@ class UserService {
         return this.axiosInstance.get(`/api//users/${id}`);
     }
 
-    public async createUser(user: User): Promise<AxiosResponse<User>> {
+    public async createUser(user: UserCreation): Promise<AxiosResponse<User>> {
         return this.axiosInstance.post('/api/users', user);
     }
 
@@ -36,9 +36,5 @@ class UserService {
         return this.axiosInstance.delete(`/api/users/${id}`);
     }
 }
-
-// Example usage:
-// const userService = new UserService('http://localhost:3000');
-// userService.getUsers().then(response => console.log(response.data));
 
 export default UserService;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { UserTable, UserService } from '../../features/users';
+import { UserTable, UserService, RoleSelection } from '../../features/users';
 import { User } from '../../features/users/types';
 import Breadcrumbs from '../../components/layout/Breadcrumbs';
 import Pagination from '../../components/layout/Pagination';
@@ -22,6 +22,7 @@ const UserLists: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
+    const [roles, setRoles] = useState<number>(0)
 
 
 
@@ -46,7 +47,7 @@ const UserLists: React.FC = () => {
     useEffect(() => {
         const fetchUsers = async (page: number = 1) => {
             try {
-                const response = await userService.getUsers(page);
+                const response = await userService.getUsers(page, roles);
                 setUsers(response.data);
                 setTotalPages(response.meta.last_page);
                 setCurrentPage(response.meta.current_page);
@@ -56,7 +57,7 @@ const UserLists: React.FC = () => {
         };
 
         fetchUsers(currentPage);
-    }, [currentPage]);
+    }, [currentPage, roles]);
 
     const navigateToPage = (page: number) => {
         setCurrentPage(page);
@@ -93,6 +94,10 @@ const UserLists: React.FC = () => {
                     Create User
                 </button>
             </div>
+            <div className='p-3 bg-white shadow-md rounded-md my-3 flex justify-end items-baseline'>
+                Select Role: <RoleSelection roles={roles} setRoles={setRoles} />
+            </div>
+            
             <UserTable users={users} onDeleteUser={deleteUser} />
             <Pagination currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
         </div>

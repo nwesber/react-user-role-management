@@ -29,8 +29,8 @@ class UserService {
      * 
      * @returns {Promise<User[]>} A promise that resolves to an array of User objects.
      */
-    public async getUsers(page: number): Promise<UsersApiResponse> {
-        const response = await this.axiosInstance.get(`/api/users?page=${page}`);
+    public async getUsers(page: number, roles: number): Promise<UsersApiResponse> {
+        const response = await this.axiosInstance.get(`/api/users?page=${page}&role_id=${roles}`);
         return response.data;
     }
 
